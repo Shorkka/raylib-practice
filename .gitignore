@@ -1,0 +1,20 @@
+# Plantilla base
+vscode-template/
+
+# Vs code 
+.vscode/
+
+# Binarios
+*.exe
+*.out
+
+# Objects
+*.o
+*.obj
+
+# Compilers
+build/
+bin/
+
+# Raylib
+*.dll
