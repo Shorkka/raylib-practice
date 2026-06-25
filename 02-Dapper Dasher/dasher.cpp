@@ -26,12 +26,16 @@ int main()
 
     // Nebula variables
     Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png");
-    Rectangle nebRec{0.0, 0.0, nebula.width/8.0, nebula.height/8.0};
+    Rectangle nebRec{0.0, 0.0, nebula.width/8, nebula.height/8};
     Vector2 nebPos{windowsWidth, windowsHeight - nebRec.height};
-    // Speed of nebula (pixel for seconds)
     
+    // Speed of nebula (pixel for seconds)
     int nebVel{-600};
 
+    // Nebula animation variables
+    int nebFrame{};
+    const float nebUpdateTime{1.0/12.0};
+    float nebRunningTime;
     // pixel for secon
     const int jumpVel{-600};
     
@@ -70,7 +74,7 @@ int main()
                 isInAir = false;
             }
             else{
-                // rectangle is in the air
+                // scarfy is in the air
                     velocity  += gravity * dT;
                     isInAir = true;
             }
@@ -85,17 +89,32 @@ int main()
 
             // update scarfy position
             scarfyPos.y += velocity * dT;
-
-            // update running time
-            runningTime+= dT;
-            if(runningTime >= updateTime){
-                // update animation frame
-                scarfyRec.x= frame*scarfyRec.width;
-                frame++;
-                if(frame > 5){
-                    frame = 0;
+            if(!isInAir){
+                // update running time
+                runningTime+= dT;
+                if(runningTime >= updateTime){
+                    // update animation frame
+                    scarfyRec.x= frame*scarfyRec.width;
+                    frame++;
+                    if(frame > 5){
+                        frame = 0;
+                    }
+                    runningTime = 0.0;
                 }
-                runningTime = 0.0;
+            }
+            // Neubla frame Update
+            nebRunningTime += dT;
+            if(!isInAir){
+                if(nebRunningTime >= nebUpdateTime){
+                    nebRunningTime = 0.0;
+                    nebRec.x = nebFrame*nebRec.width;
+                    nebFrame++;
+                    if(nebFrame > 8){
+                        nebFrame = 0;
+                    }
+                    nebRunningTime = 0.0;
+                }
+
             }
             // Draw nebula
             DrawTextureRec(nebula, nebRec, nebPos, WHITE);
