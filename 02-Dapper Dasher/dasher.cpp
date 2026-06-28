@@ -16,11 +16,11 @@ int main()
     const short windowsHeight{380};
     
     InitWindow(windowsWidth, windowsHeight, " Practica 2");
-    // if this variable is true game end
-    bool gameEnd{false};
-    bool isInAir{false};
-    int gravity{1'000}; // (p/s)/s
 
+    bool gameEnd{false}; // if this variable is true game end
+    bool isInAir{false}; 
+    int gravity{1'000}; // (p/s)/s
+    int count = 0;
     // scarfy vairables
     Texture2D scarfy = LoadTexture("textures/scarfy.png"); 
     animData scarfyData{
@@ -47,25 +47,17 @@ int main()
         1.0/16.0, // float updateTime
         0.0 // float runningTime
     };
+
     // Speed of nebula (pixel for seconds)
     int nebVel{-600};
     int neb2Vel{-600};
-    // Nebula animation variables
-   // int nebFrame{};
-    //const float nebUpdateTime{1.0/12.0};
-    //float nebRunningTime;
-    // pixel for secon
+
+    // Jump speed of scarfy
     const int jumpVel{-600};
     
     // Initial position    
     int velocity{0};
     
-    //int frame{}; // animation frame
-
-    // amount of time before we update the animation frame
-    //const float updateTime{1.0 / 12.0};
-    //float runningTime{};
-    // Set FPS in 60
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -156,4 +148,3 @@ int main()
     UnloadTexture(nebula);
     CloseWindow();
 }
-         
