@@ -11,7 +11,7 @@ struct animData
 };
 
 bool isOnGround(animData, int);
-animData updateAnimData(animData, float, int);
+animData updateAnimData(animData, float, short);
 
 int main()
 {
